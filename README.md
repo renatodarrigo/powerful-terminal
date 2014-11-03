@@ -3,10 +3,12 @@
 Always beta.
 
 With features by:
+
 - Shawn O. Pearce <spearce@spearce.org>;
 - Joe Fleming <https://twitter.com/w33ble>
 
 And thanks to:
+
 - Marcelo Carneiro <https://github.com/mcarneiro> for showing me this;
 - Fernando Nunes <https://github.com/gnomonunes> for feedback about features and bugs.
 
@@ -22,7 +24,19 @@ And thanks to:
 - Git branch display with icons for different statuses;
 - Color alert when in master so you don't go crazy commiting changes in production code.
 
-##How to use
+##Warning
+
+Tested on Mac.
+
+Linux / Windows (Git Bash) might need some tweaks.
+
+
+##Automatic Install
+
+1. Run `./install.sh`
+2. Reload .bash_profile with `source ~/.bash_profile`
+
+##Manual Install
 
 1. Move the files to your home directory
 2. Rename the files to be hidden:
