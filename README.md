@@ -9,7 +9,7 @@ With features by:
 
 And thanks to:
 
-- Marcelo Carneiro <https://github.com/mcarneiro> for showing me this;
+- Marcelo Carneiro <https://github.com/mcarneiro> for showing me the git completion and branch parsing stuff;
 - Fernando Nunes <https://github.com/gnomonunes> for feedback about features and bugs.
 
 ##Screenshot
