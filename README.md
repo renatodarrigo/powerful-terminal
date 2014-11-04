@@ -22,7 +22,8 @@ And thanks to:
 - Folder full path with item count and size count;
 - Git commands completion;
 - Git branch display with icons for different statuses;
-- Color alert when in master so you don't go crazy commiting changes in production code.
+- Color alert when in master so you don't go crazy commiting changes in production code;
+- Install script (can update too, preserves your mods on profile file).
 
 ##Warning
 
@@ -34,7 +35,8 @@ Linux / Windows (Git Bash) might need some tweaks.
 ##Automatic Install
 
 1. Run `./install.sh`
-2. Reload .bash_profile with `source ~/.bash_profile`
+2. Answer the questions.
+3. Follow the (only) instruction after install.
 
 ##Manual Install
 
@@ -43,7 +45,6 @@ Linux / Windows (Git Bash) might need some tweaks.
 `mv bash_profile .bash_profile`
 `mv git-completion.sh .git-completion.sh`
 `mv git-parse-branch.sh .git-parse-branch`
-3. Reload .bash_profile
-`source ~/.bash_profile`
+3. Reload .bash_profile with `source ~/.bash_profile`
 
 Enjoy!
