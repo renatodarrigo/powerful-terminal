@@ -6,6 +6,7 @@ echo ""
 
 userOS=
 userfile=
+userfilepath=
 
 checkOS()
 {
@@ -41,9 +42,16 @@ checkFile()
 
 	if [[ $userfile = "" ]]; then
 		userfile="~/.bash_profile"
+		userfilepath=~/.bash_profile
+	else
+		userfilepath="${userfile/#"~"/$HOME}"
 	fi
 
-	sed -i '' '/POWERFUL TERMINAL BEGIN/,/POWERFUL TERMINAL END/ d' $userfile
+	if [[ ! -f $userfilepath ]]; then
+		touch $userfilepath
+	fi
+
+	sed -i '' '/POWERFUL TERMINAL BEGIN/,/POWERFUL TERMINAL END/ d' $userfilepath
 }
 
 checkOS
@@ -62,17 +70,17 @@ fi
 old_IFS=$IFS
 IFS=$'\n'
 
-echo "#====================== POWERFUL TERMINAL BEGIN ======================#" >> $userfile
-echo "#= do not remove this block if you want to update via install script =#" >> $userfile
-echo "" >> $userfile
+echo "#====================== POWERFUL TERMINAL BEGIN ======================#" >> $userfilepath
+echo "#= do not remove this block if you want to update via install script =#" >> $userfilepath
+echo "" >> $userfilepath
 
 while read -r line; do    
-    echo "$line" >> $userfile 
+    echo "$line" >> $userfilepath
 done < $sourcefile
 
-echo "" >> $userfile
-echo "#= do not remove this block if you want to update via install script =#" >> $userfile
-echo "#======================= POWERFUL TERMINAL END =======================#" >> $userfile
+echo "" >> $userfilepath
+echo "#= do not remove this block if you want to update via install script =#" >> $userfilepath
+echo "#======================= POWERFUL TERMINAL END =======================#" >> $userfilepath
 
 cp git-completion.sh ~/.git-completion.sh
 cp git-parse-branch.sh ~/.git-parse-branch.sh
