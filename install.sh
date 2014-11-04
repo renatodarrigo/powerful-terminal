@@ -1,19 +1,85 @@
 #!/bin/sh
+echo "\033[0;94m╔════════════════════════════════╗\033[0m"
+echo "\033[0;94m║\033[0m\033[0;94m Powerful Terminal Installation \033[0;94m║\033[0m"
+echo "\033[0;94m╚════════════════════════════════╝\033[0m"
+echo ""
+
+userOS=
+userfile=
+
+checkOS()
+{
+	echo "\033[0;93m* Are you on a (M)ac, (L)inux or (W)indows/Git Bash?\033[0m"
+	read userOS
+
+	userOS=$(echo $userOS | awk {'print tolower($0)'})
+
+	case $userOS in
+		m*)	userOS="Mac"
+			echo "\033[0;92mOK, you are using Mac.\033[0m"
+			;;
+
+		l*)	userOS="Linux"
+			echo "\033[0;92mOK, you are using Linux.\033[0m"
+			;;
+
+		w*)	userOS="Windows"
+			echo "\033[0;92mOK, you are using Windows.\033[0m"
+			;;
+
+		*)	echo "\033[0;91mInvalid option. Try again.\033[0m"
+			echo ""
+			checkOS
+			;;
+	esac
+}
+
+checkFile()
+{
+	echo "\033[0;93m* What is your profile file? - (~/.bash_profile)\033[0m"
+	read userfile
+
+	if [[ $userfile = "" ]]; then
+		userfile="~/.bash_profile"
+	fi
+
+	sed -i '' '/POWERFUL TERMINAL BEGIN/,/POWERFUL TERMINAL END/ d' $userfile
+}
+
+checkOS
+checkFile
+
+echo "\033[0;92mOK, installing...\033[0m"
+
+sourcefile=
+
+if [[ $userOS = "Mac" ]]; then
+	sourcefile="bash_profile"
+else
+	sourcefile="bash_profile_linwin"
+fi
 
 old_IFS=$IFS
 IFS=$'\n'
 
-echo "" >> ~/.bash_profile
-echo "#======= POWERFUL TERMINAL =======#" >> ~/.bash_profile
+echo "#====================== POWERFUL TERMINAL BEGIN ======================#" >> $userfile
+echo "#= do not remove this block if you want to update via install script =#" >> $userfile
+echo "" >> $userfile
 
-while read line; do    
-    echo $line >> ~/.bash_profile   
-done < bash_profile
+while read -r line; do    
+    echo "$line" >> $userfile 
+done < $sourcefile
+
+echo "" >> $userfile
+echo "#= do not remove this block if you want to update via install script =#" >> $userfile
+echo "#======================= POWERFUL TERMINAL END =======================#" >> $userfile
 
 cp git-completion.sh ~/.git-completion.sh
 cp git-parse-branch.sh ~/.git-parse-branch.sh
 
 IFS=$old_IFS
 
-echo "Powerful Terminal Installed"
-echo "Run 'source ~/.bash_profile' to activate."
+echo ""
+echo "\033[0;92mPowerful Terminal Installed\033[0m"
+echo "\033[0;92mRun \033[0msource $userfile \033[0;92mto activate.\033[0m"
+echo ""
