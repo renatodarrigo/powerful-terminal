@@ -27,9 +27,9 @@ And thanks to:
 
 ##Warning
 
-Tested on Mac.
+Tested on Mac and Ubuntu Linux.
 
-Linux / Windows (Git Bash) might need some tweaks.
+Will not work on Windows.
 
 
 ##Automatic Install

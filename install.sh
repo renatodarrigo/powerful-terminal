@@ -10,7 +10,7 @@ userfilepath=
 
 checkOS()
 {
-	echo "\033[0;93m* Are you on a (M)ac, (L)inux or (W)indows/Git Bash?\033[0m"
+	echo "\033[0;93m* Are you on a (M)ac or (L)inux\033[0m"
 	read userOS
 
 	userOS=$(echo $userOS | awk {'print tolower($0)'})
@@ -22,10 +22,6 @@ checkOS()
 
 		l*)	userOS="Linux"
 			echo "\033[0;92mOK, you are using Linux.\033[0m"
-			;;
-
-		w*)	userOS="Windows"
-			echo "\033[0;92mOK, you are using Windows.\033[0m"
 			;;
 
 		*)	echo "\033[0;91mInvalid option. Try again.\033[0m"
@@ -40,18 +36,20 @@ checkFile()
 	echo "\033[0;93m* What is your profile file? - (~/.bash_profile)\033[0m"
 	read userfile
 
-	if [[ $userfile = "" ]]; then
+	if [ "$userfile" = '' ]; then
 		userfile="~/.bash_profile"
 		userfilepath=~/.bash_profile
 	else
-		userfilepath="${userfile/#"~"/$HOME}"
+		userfilepath=$(echo $userfile | sed 's/\~/$HOME/')
 	fi
 
-	if [[ ! -f $userfilepath ]]; then
+	if [ ! -f $userfilepath ]; then
 		touch $userfilepath
 	fi
 
-	sed -i '' '/POWERFUL TERMINAL BEGIN/,/POWERFUL TERMINAL END/ d' $userfilepath
+	sed '/POWERFUL TERMINAL BEGIN/,/POWERFUL TERMINAL END/ d' $userfilepath > ${userfilepath}.temp
+	cp ${userfilepath}.temp $userfilepath
+	rm ${userfilepath}.temp
 }
 
 checkOS
@@ -61,10 +59,10 @@ echo "\033[0;92mOK, installing...\033[0m"
 
 sourcefile=
 
-if [[ $userOS = "Mac" ]]; then
+if [ $userOS = "Mac" ]; then
 	sourcefile="bash_profile"
 else
-	sourcefile="bash_profile_linwin"
+	sourcefile="bash_profile_lin"
 fi
 
 old_IFS=$IFS

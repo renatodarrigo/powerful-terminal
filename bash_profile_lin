@@ -3,6 +3,7 @@ source ~/.git-parse-branch.sh
 
 alias ls="ls -GF"
 alias ll="ls -GFla"
+alias git="LANG=en_US.UTF-8 git"
 
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
