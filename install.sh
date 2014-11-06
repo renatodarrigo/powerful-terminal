@@ -40,7 +40,7 @@ checkFile()
 		userfile="~/.bash_profile"
 		userfilepath=~/.bash_profile
 	else
-		userfilepath=$(echo $userfile | sed 's/\~/$HOME/')
+		userfilepath=$(echo $userfile | sed "s|\~|$HOME|")
 	fi
 
 	if [ ! -f $userfilepath ]; then
