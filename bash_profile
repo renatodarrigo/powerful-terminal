@@ -9,7 +9,7 @@ export LSCOLORS=ExFxBxDxCxegedabagacad
 
 foldersize()
 {
-	FILES=$(ls -lrt | awk 'BEGIN { total = 0 }; { total += $5 }; END { print total }')
+	FILES=$(ls -goaS | awk 'BEGIN { total = 0 }; { total += $3 }; END { print total }')
 
 	if [ $FILES -eq 0 ]; then
 		echo "0 bytes"
